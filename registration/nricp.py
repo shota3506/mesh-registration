@@ -15,6 +15,7 @@ def cholesky_solve(M, b):
 def nricp(
     source,
     target,
+    threshold=1e8,
     alphas=np.linspace(50, 1, 20),
     gamma=1,
     eps=1e-2,
@@ -76,7 +77,9 @@ def nricp(
             indices = indices.squeeze()
 
             # 1. Distance term
-            W = sparse.diags(np.ones((n_source_vertices)))  # weight
+            W = sparse.diags(
+                (distances < threshold).flatten().astype(np.float32)
+            )  # weight
             U = target_vertices[indices]
             A_d = W.dot(D)
             B_d = W.dot(U)
