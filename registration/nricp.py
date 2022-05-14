@@ -70,7 +70,7 @@ def nricp(
         for i in range(n_max_inner):
             X_prev = X
 
-            transformed = D * X
+            transformed = D.dot(X)
 
             distances, indices = knn.kneighbors(transformed)
             indices = indices.squeeze()
@@ -93,6 +93,6 @@ def nricp(
             if np.mean(np.linalg.norm(X - X_prev, axis=1)) < eps:
                 break
 
-    transformed = D * X
+    transformed = D.dot(X)
     source.vertices = open3d.utility.Vector3dVector(transformed)
     return source
