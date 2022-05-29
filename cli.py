@@ -1,7 +1,7 @@
 import argparse
 import open3d
 
-import registration
+import icp
 
 
 def main(args):
@@ -10,10 +10,10 @@ def main(args):
     source.compute_vertex_normals()
     target.compute_vertex_normals()
 
-    if args.method == "icp":
-        deformed = registration.icp(source, target)
-    elif args.method == "nricp":
-        deformed = registration.nricp(source, target, coverage=True)
+    if args.method == "rigid":
+        deformed = icp.rigid(source, target)
+    elif args.method == "nonrigid":
+        deformed = icp.nonrigid(source, target, coverage=True)
     else:
         deformed = source
 
@@ -25,7 +25,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--method", dest="method", type=str, default="icp")
+    parser.add_argument("--method", dest="method", type=str, default="rigid")
     parser.add_argument("--src", dest="source", type=str, default="data/source.obj")
     parser.add_argument("--tgt", dest="target", type=str, default="data/target.obj")
     parser.add_argument("--dest", dest="destination", type=str, default="")

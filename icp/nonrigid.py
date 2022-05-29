@@ -24,7 +24,7 @@ def stiffness_loss(kron_M_G, alpha_stiffness):
 
 
 # Non-Ridid ICP Registratoin
-def nricp(
+def nonrigid(
     source,
     target,
     threshold=1e8,

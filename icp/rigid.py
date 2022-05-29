@@ -3,8 +3,8 @@ import open3d
 import numpy as np
 
 
-# ICP Registration
-def icp(source, target, threshold=0.02):
+# Rigid ICP Registration
+def rigid(source, target, threshold=0.02):
     sourceply = open3d.geometry.PointCloud()
     targetply = open3d.geometry.PointCloud()
     sourceply.points = copy.deepcopy(source.vertices)
