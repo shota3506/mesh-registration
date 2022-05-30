@@ -28,7 +28,9 @@ def nonrigid(
     source,
     target,
     threshold=1e8,
-    alphas=np.linspace(50, 1, 20),
+    alphas=np.array(
+        [200, 140, 100, 70, 40, 30, 25, 20, 15, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+    ),
     gamma=1,
     eps=1e-2,
     coverage=False,

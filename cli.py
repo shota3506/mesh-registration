@@ -13,11 +13,15 @@ def main(args):
     if args.method == "icp":
         deformed = (
             icp.rigid(source, target)
-            if args.deformable
+            if not args.deformable
             else icp.nonrigid(source, target, coverage=True)
         )
     else:
         deformed = source
+
+    deformed.paint_uniform_color([1, 0, 0])
+    open3d.visualization.draw_geometries([deformed, target])
+    open3d.visualization.draw_geometries([deformed])
 
     if args.destination != "":
         open3d.io.write_triangle_mesh(
